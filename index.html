@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPP - Parisi Provence Peinture | Artisan Peintre Expert en Provence</title>
+    <meta name="description" content="Parisi Provence Peinture (PPP) : Votre expert en rénovation, peinture intérieure et extérieure en Provence. Qualité artisanale, finitions soignées et devis gratuit.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Montserrat', sans-serif; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .hero-gradient { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1589939705384-5185138a04b9?auto=format&fit=crop&q=80'); background-size: cover; background-position: center; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 glass border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-900">PPP<span class="text-orange-600">.</span></div>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#accueil" class="hover:text-orange-600 transition">Accueil</a>
+                <a href="#services" class="hover:text-orange-600 transition">Services</a>
+                <a href="#realisations" class="hover:text-orange-600 transition">Réalisations</a>
+                <a href="#contact" class="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-700 transition">Devis Gratuit</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="accueil" class="h-screen flex items-center justify-center text-center text-white hero-gradient px-4">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">Parisi Provence Peinture</h1>
+            <p class="text-xl md:text-2xl mb-8 font-light max-w-2xl mx-auto">L'art de la couleur et l'excellence de la finition au cœur de la Provence.</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#contact" class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg text-lg font-bold transition">Confier mon projet</a>
+                <a href="#services" class="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-8 py-4 rounded-lg text-lg font-bold transition border border-white/50">Nos Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl font-bold mb-4">Nos Expertises</h2>
+            <div class="w-20 h-1 bg-orange-600 mx-auto"></div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition group" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-orange-600 transition">
+                    <svg class="w-8 h-8 text-orange-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Peinture Intérieure</h3>
+                <p class="text-gray-600">Rénovation complète, enduits de lissage et peintures décoratives pour sublimer votre intérieur.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition group" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-900 transition">
+                    <svg class="w-8 h-8 text-blue-900 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Ravalement Façade</h3>
+                <p class="text-gray-600">Protection et mise en valeur de votre patrimoine extérieur avec des produits adaptés au climat provençal.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition group" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-700 transition">
+                    <svg class="w-8 h-8 text-green-700 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Décoration & Stucco</h3>
+                <p class="text-gray-600">Effets de matières, bétons cirés et techniques traditionnelles pour un rendu unique.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-blue-900 py-24 text-white">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-4xl font-bold mb-6">Un projet en Provence ?</h2>
+                <p class="text-blue-200 mb-8 text-lg">Basée à Marseille et intervenant dans toute la région, l'entreprise <strong>Parisi Provence Peinture</strong> vous accompagne de A à Z.</p>
+                <ul class="space-y-4">
+                    <li class="flex items-center"><span class="w-6 h-6 bg-orange-600 rounded-full mr-4 flex items-center justify-center text-sm">✓</span> Devis sous 48h</li>
+                    <li class="flex items-center"><span class="w-6 h-6 bg-orange-600 rounded-full mr-4 flex items-center justify-center text-sm">✓</span> Respect des délais</li>
+                    <li class="flex items-center"><span class="w-6 h-6 bg-orange-600 rounded-full mr-4 flex items-center justify-center text-sm">✓</span> Garantie Décennale</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl text-slate-900 shadow-xl" data-aos="fade-left">
+                <form action="#" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" placeholder="Nom" class="w-full p-3 border rounded-lg focus:outline-orange-600">
+                        <input type="text" placeholder="Téléphone" class="w-full p-3 border rounded-lg focus:outline-orange-600">
+                    </div>
+                    <input type="email" placeholder="Email" class="w-full p-3 border rounded-lg focus:outline-orange-600">
+                    <textarea placeholder="Décrivez votre projet..." rows="4" class="w-full p-3 border rounded-lg focus:outline-orange-600"></textarea>
+                    <button class="w-full bg-orange-600 text-white py-4 rounded-lg font-bold hover:bg-orange-700 transition shadow-lg">Demander mon devis gratuit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-slate-900 text-slate-400 text-center border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="mb-4">© 2024 Parisi Provence Peinture (PPP) - Tous droits réservés.</p>
+            <p class="text-sm">Artisan Peintre à Marseille, Aix-en-Provence, et PACA. Experts en rénovation immobilière.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+</html>
+
+
