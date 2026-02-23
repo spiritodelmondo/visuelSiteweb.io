@@ -1,121 +1,1078 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPP - Parisi Provence Peinture | Artisan Peintre Expert en Provence</title>
-    <meta name="description" content="Parisi Provence Peinture (PPP) : Votre expert en rénovation, peinture intérieure et extérieure en Provence. Qualité artisanale, finitions soignées et devis gratuit.">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
-    <style>
-        body { font-family: 'Montserrat', sans-serif; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
-        .hero-gradient { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1589939705384-5185138a04b9?auto=format&fit=crop&q=80'); background-size: cover; background-position: center; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PPP - Parisi Provence Peinture, entreprise de peinture artisanale en Provence. Peinture intérieure, extérieure, ravalement et décoration.">
+  <meta name="keywords" content="peinture, Provence, Parisi, peintre, ravalement, décoration, artisan">
+  <title>PPP | Parisi Provence Peinture - Artisans Peintres</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #1a1714;
+      --bg-light: #f7f3ed;
+      --fg: #f7f3ed;
+      --fg-dark: #1a1714;
+      --muted: #8c7b6b;
+      --accent: #c45c3e;
+      --accent-light: #e8a87c;
+      --card: rgba(247, 243, 237, 0.05);
+      --border: rgba(247, 243, 237, 0.1);
+      --terracotta: #c45c3e;
+      --ochre: #d4a853;
+      --sage: #7a8c6e;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: hidden;
+    }
+    
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 4px;
+    }
+    
+    /* Animated background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    
+    .paint-stroke {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: float 20s ease-in-out infinite;
+    }
+    
+    .stroke-1 {
+      width: 600px;
+      height: 600px;
+      background: var(--terracotta);
+      top: -200px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+    
+    .stroke-2 {
+      width: 500px;
+      height: 500px;
+      background: var(--ochre);
+      bottom: -150px;
+      left: -100px;
+      animation-delay: -7s;
+    }
+    
+    .stroke-3 {
+      width: 400px;
+      height: 400px;
+      background: var(--sage);
+      top: 50%;
+      left: 30%;
+      animation-delay: -14s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 30px) scale(1.02); }
+    }
+    
+    /* Brush stroke animation */
+    .brush-reveal {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .brush-reveal::after {
+      content: '';
+      position: absolute;
+      inset: -10px -20px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      z-index: -1;
+      border-radius: 4px;
+      transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    
+    .brush-reveal.in-view::after {
+      transform: scaleX(1);
+    }
+    
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    
+    /* Paint drip animation */
+    .paint-drip {
+      position: absolute;
+      width: 4px;
+      height: 0;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      border-radius: 0 0 4px 4px;
+      animation: drip 3s ease-in-out infinite;
+    }
+    
+    @keyframes drip {
+      0%, 100% { height: 0; opacity: 0; }
+      10% { opacity: 1; }
+      50% { height: 80px; opacity: 1; }
+      60% { height: 80px; opacity: 0; }
+    }
+    
+    /* Service cards */
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--terracotta), var(--ochre));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(196, 92, 62, 0.15);
+    }
+    
+    .service-icon {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+    
+    /* Gallery */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    
+    .gallery-item img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26, 23, 20, 0.9), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    
+    /* Counter animation */
+    .counter {
+      font-variant-numeric: tabular-nums;
+    }
+    
+    /* Form styles */
+    .form-input {
+      background: var(--card);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(196, 92, 62, 0.2);
+    }
+    
+    /* Button */
+    .btn-primary {
+      position: relative;
+      background: linear-gradient(135deg, var(--terracotta), var(--ochre));
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--ochre), var(--terracotta));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(196, 92, 62, 0.4);
+    }
+    
+    .btn-primary:hover::before {
+      opacity: 1;
+    }
+    
+    .btn-primary span {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Navigation */
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
+    
+    /* Texture overlay */
+    .texture-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    
+    /* Marquee */
+    .marquee {
+      display: flex;
+      animation: marquee 30s linear infinite;
+    }
+    
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+    
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
-
-    <nav class="fixed w-full z-50 glass border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-blue-900">PPP<span class="text-orange-600">.</span></div>
-            <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#accueil" class="hover:text-orange-600 transition">Accueil</a>
-                <a href="#services" class="hover:text-orange-600 transition">Services</a>
-                <a href="#realisations" class="hover:text-orange-600 transition">Réalisations</a>
-                <a href="#contact" class="bg-orange-600 text-white px-6 py-2 rounded-full hover:bg-orange-700 transition">Devis Gratuit</a>
-            </div>
+<body>
+  <!-- Texture overlay -->
+  <div class="texture-overlay"></div>
+  
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-terracotta to-ochre flex items-center justify-center" style="background: linear-gradient(135deg, var(--terracotta), var(--ochre));">
+          <span class="font-display font-bold text-lg text-white">PPP</span>
         </div>
-    </nav>
-
-    <section id="accueil" class="h-screen flex items-center justify-center text-center text-white hero-gradient px-4">
-        <div data-aos="fade-up" data-aos-duration="1000">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">Parisi Provence Peinture</h1>
-            <p class="text-xl md:text-2xl mb-8 font-light max-w-2xl mx-auto">L'art de la couleur et l'excellence de la finition au cœur de la Provence.</p>
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <a href="#contact" class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg text-lg font-bold transition">Confier mon projet</a>
-                <a href="#services" class="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-8 py-4 rounded-lg text-lg font-bold transition border border-white/50">Nos Services</a>
-            </div>
+        <div class="hidden sm:block">
+          <span class="font-display text-lg font-semibold">Parisi Provence</span>
+          <span class="block text-xs text-[var(--muted)] tracking-widest uppercase">Peinture</span>
         </div>
-    </section>
-
-    <section id="services" class="py-24 max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl font-bold mb-4">Nos Expertises</h2>
-            <div class="w-20 h-1 bg-orange-600 mx-auto"></div>
+      </a>
+      
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#services" class="nav-link text-sm font-medium hover:text-[var(--accent-light)]">Services</a>
+        <a href="#realisations" class="nav-link text-sm font-medium hover:text-[var(--accent-light)]">Réalisations</a>
+        <a href="#about" class="nav-link text-sm font-medium hover:text-[var(--accent-light)]">A propos</a>
+        <a href="#contact" class="nav-link text-sm font-medium hover:text-[var(--accent-light)]">Contact</a>
+        <a href="tel:+33600000000" class="btn-primary px-5 py-2.5 rounded-lg text-sm font-semibold">
+          <span>06 00 00 00 00</span>
+        </a>
+      </div>
+      
+      <button class="md:hidden p-2" id="menuBtn" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile menu -->
+  <div class="mobile-menu fixed inset-0 z-40 bg-[var(--bg)] flex flex-col items-center justify-center gap-8 md:hidden" id="mobileMenu">
+    <a href="#services" class="text-2xl font-display">Services</a>
+    <a href="#realisations" class="text-2xl font-display">Réalisations</a>
+    <a href="#about" class="text-2xl font-display">A propos</a>
+    <a href="#contact" class="text-2xl font-display">Contact</a>
+    <a href="tel:+33600000000" class="btn-primary px-6 py-3 rounded-lg font-semibold mt-4">
+      <span>06 00 00 00 00</span>
+    </a>
+  </div>
+  
+  <!-- Hero Section -->
+  <section class="min-h-screen relative flex items-center justify-center px-6 pt-20">
+    <div class="hero-bg">
+      <div class="paint-stroke stroke-1"></div>
+      <div class="paint-stroke stroke-2"></div>
+      <div class="paint-stroke stroke-3"></div>
+      
+      <!-- Paint drips -->
+      <div class="paint-drip" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+      <div class="paint-drip" style="left: 25%; top: 15%; animation-delay: 1s;"></div>
+      <div class="paint-drip" style="right: 15%; top: 25%; animation-delay: 2s;"></div>
+      <div class="paint-drip" style="right: 30%; top: 10%; animation-delay: 0.5s;"></div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto text-center relative z-10">
+      <div class="reveal" id="hero-badge">
+        <span class="inline-block px-4 py-2 rounded-full border border-[var(--border)] text-sm text-[var(--muted)] mb-8">
+          Artisans peintres depuis 3 générations
+        </span>
+      </div>
+      
+      <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl font-bold leading-tight mb-6 reveal reveal-delay-1" id="hero-title">
+        L'art de la peinture<br>
+        <span class="brush-reveal" id="brushReveal">en Provence</span>
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-[var(--muted)] max-w-2xl mx-auto mb-12 reveal reveal-delay-2" id="hero-subtitle">
+        Sublimez vos espaces avec notre savoir-faire artisanal. Peinture intérieure, extérieure, ravalement et décoration pour particuliers et professionnels.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal reveal-delay-3" id="hero-cta">
+        <a href="#contact" class="btn-primary px-8 py-4 rounded-xl text-lg font-semibold w-full sm:w-auto">
+          <span>Demander un devis gratuit</span>
+        </a>
+        <a href="#realisations" class="px-8 py-4 rounded-xl border border-[var(--border)] hover:border-[var(--accent)] transition-colors w-full sm:w-auto">
+          Voir nos réalisations
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-3 gap-8 mt-20 pt-12 border-t border-[var(--border)] reveal reveal-delay-4" id="hero-stats">
+        <div>
+          <div class="font-display text-4xl sm:text-5xl font-bold text-[var(--accent)] counter" data-target="25">0</div>
+          <div class="text-sm text-[var(--muted)] mt-1">Années d'expérience</div>
         </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition group" data-aos="fade-up" data-aos-delay="100">
-                <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-orange-600 transition">
-                    <svg class="w-8 h-8 text-orange-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                </div>
-                <h3 class="text-2xl font-bold mb-4">Peinture Intérieure</h3>
-                <p class="text-gray-600">Rénovation complète, enduits de lissage et peintures décoratives pour sublimer votre intérieur.</p>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition group" data-aos="fade-up" data-aos-delay="200">
-                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-900 transition">
-                    <svg class="w-8 h-8 text-blue-900 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                </div>
-                <h3 class="text-2xl font-bold mb-4">Ravalement Façade</h3>
-                <p class="text-gray-600">Protection et mise en valeur de votre patrimoine extérieur avec des produits adaptés au climat provençal.</p>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition group" data-aos="fade-up" data-aos-delay="300">
-                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-700 transition">
-                    <svg class="w-8 h-8 text-green-700 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
-                </div>
-                <h3 class="text-2xl font-bold mb-4">Décoration & Stucco</h3>
-                <p class="text-gray-600">Effets de matières, bétons cirés et techniques traditionnelles pour un rendu unique.</p>
-            </div>
+        <div>
+          <div class="font-display text-4xl sm:text-5xl font-bold text-[var(--accent)] counter" data-target="500">0</div>
+          <div class="text-sm text-[var(--muted)] mt-1">Projets réalisés</div>
         </div>
-    </section>
-
-    <section id="contact" class="bg-blue-900 py-24 text-white">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
-            <div data-aos="fade-right">
-                <h2 class="text-4xl font-bold mb-6">Un projet en Provence ?</h2>
-                <p class="text-blue-200 mb-8 text-lg">Basée à Marseille et intervenant dans toute la région, l'entreprise <strong>Parisi Provence Peinture</strong> vous accompagne de A à Z.</p>
-                <ul class="space-y-4">
-                    <li class="flex items-center"><span class="w-6 h-6 bg-orange-600 rounded-full mr-4 flex items-center justify-center text-sm">✓</span> Devis sous 48h</li>
-                    <li class="flex items-center"><span class="w-6 h-6 bg-orange-600 rounded-full mr-4 flex items-center justify-center text-sm">✓</span> Respect des délais</li>
-                    <li class="flex items-center"><span class="w-6 h-6 bg-orange-600 rounded-full mr-4 flex items-center justify-center text-sm">✓</span> Garantie Décennale</li>
-                </ul>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl text-slate-900 shadow-xl" data-aos="fade-left">
-                <form action="#" class="space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="text" placeholder="Nom" class="w-full p-3 border rounded-lg focus:outline-orange-600">
-                        <input type="text" placeholder="Téléphone" class="w-full p-3 border rounded-lg focus:outline-orange-600">
-                    </div>
-                    <input type="email" placeholder="Email" class="w-full p-3 border rounded-lg focus:outline-orange-600">
-                    <textarea placeholder="Décrivez votre projet..." rows="4" class="w-full p-3 border rounded-lg focus:outline-orange-600"></textarea>
-                    <button class="w-full bg-orange-600 text-white py-4 rounded-lg font-bold hover:bg-orange-700 transition shadow-lg">Demander mon devis gratuit</button>
-                </form>
-            </div>
+        <div>
+          <div class="font-display text-4xl sm:text-5xl font-bold text-[var(--accent)] counter" data-target="100">0</div>
+          <div class="text-sm text-[var(--muted)] mt-1">% Satisfaction</div>
         </div>
-    </section>
-
-    <footer class="py-12 bg-slate-900 text-slate-400 text-center border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4">
-            <p class="mb-4">© 2024 Parisi Provence Peinture (PPP) - Tous droits réservés.</p>
-            <p class="text-sm">Artisan Peintre à Marseille, Aix-en-Provence, et PACA. Experts en rénovation immobilière.</p>
+      </div>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--muted)]">
+      <span class="text-xs tracking-widest uppercase">Découvrir</span>
+      <div class="w-6 h-10 rounded-full border-2 border-[var(--border)] flex justify-center pt-2">
+        <div class="w-1.5 h-3 bg-[var(--accent)] rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Services Section -->
+  <section id="services" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-[var(--accent)] text-sm tracking-widest uppercase reveal">Nos expertises</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mt-4 reveal reveal-delay-1">Services sur mesure</h2>
+        <p class="text-[var(--muted)] mt-4 max-w-xl mx-auto reveal reveal-delay-2">
+          Un accompagnement personnalisé pour chaque projet, avec des matériaux de qualité professionnelle.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Service 1 -->
+        <div class="service-card rounded-2xl p-6 reveal reveal-delay-1">
+          <div class="service-icon w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--terracotta)] to-[var(--ochre)] flex items-center justify-center mb-6">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+              <path d="M3 21h18M3 10h18M3 7l9-4 9 4M4 10v11M20 10v11"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3">Peinture intérieure</h3>
+          <p class="text-[var(--muted)] text-sm leading-relaxed">
+            Murs, plafonds, boiseries. Finitions soignées et conseils couleurs personnalisés.
+          </p>
+          <ul class="mt-4 space-y-2 text-sm text-[var(--muted)]">
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+              Préparation minutieuse
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+              Peintures écologiques
+            </li>
+          </ul>
         </div>
-    </footer>
+        
+        <!-- Service 2 -->
+        <div class="service-card rounded-2xl p-6 reveal reveal-delay-2">
+          <div class="service-icon w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--sage)] to-[var(--ochre)] flex items-center justify-center mb-6">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3">Ravalement façade</h3>
+          <p class="text-[var(--muted)] text-sm leading-relaxed">
+            Rénovation complète de vos façades avec traitement et protection durable.
+          </p>
+          <ul class="mt-4 space-y-2 text-sm text-[var(--muted)]">
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+              Nettoyage professionnel
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+              Traitement anti-mousse
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Service 3 -->
+        <div class="service-card rounded-2xl p-6 reveal reveal-delay-3">
+          <div class="service-icon w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--ochre)] to-[var(--terracotta)] flex items-center justify-center mb-6">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3">Décoration</h3>
+          <p class="text-[var(--muted)] text-sm leading-relaxed">
+            Effets décoratifs, enduits à la chaux, patines et finitions artisanales.
+          </p>
+          <ul class="mt-4 space-y-2 text-sm text-[var(--muted)]">
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+              Techniques artisanales
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+              Finitions uniques
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Service 4 -->
+        <div class="service-card rounded-2xl p-6 reveal reveal-delay-4">
+          <div class="service-icon w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--terracotta)] to-[var(--sage)] flex items-center justify-center mb-6">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3">Peinture extérieure</h3>
+          <p class="text-[var(--muted)] text-sm leading-relaxed">
+            Volets, portails, clôtures. Protections adaptées au climat provençal.
+          </p>
+          <ul class="mt-4 space-y-2 text-sm text-[var(--muted)]">
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+              Peintures résistantes UV
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)]"></span>
+              Garantie 10 ans
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Marquee -->
+  <div class="py-6 border-y border-[var(--border)] overflow-hidden">
+    <div class="marquee whitespace-nowrap">
+      <span class="inline-flex items-center gap-8 text-lg font-display text-[var(--muted)]">
+        <span>Peinture intérieure</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Ravalement façade</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Décoration artisanale</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Peinture extérieure</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Enduits décoratifs</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Conseil couleurs</span>
+        <span class="text-[var(--accent)]">★</span>
+      </span>
+      <span class="inline-flex items-center gap-8 text-lg font-display text-[var(--muted)]">
+        <span>Peinture intérieure</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Ravalement façade</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Décoration artisanale</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Peinture extérieure</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Enduits décoratifs</span>
+        <span class="text-[var(--accent)]">★</span>
+        <span>Conseil couleurs</span>
+        <span class="text-[var(--accent)]">★</span>
+      </span>
+    </div>
+  </div>
+  
+  <!-- Gallery Section -->
+  <section id="realisations" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+        <div>
+          <span class="text-[var(--accent)] text-sm tracking-widest uppercase reveal">Portfolio</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold mt-4 reveal reveal-delay-1">Nos réalisations</h2>
+        </div>
+        <div class="flex gap-2 mt-6 md:mt-0 reveal reveal-delay-2">
+          <button class="filter-btn px-4 py-2 rounded-lg border border-[var(--accent)] text-[var(--accent)] text-sm font-medium active" data-filter="all">Tous</button>
+          <button class="filter-btn px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--muted)] text-sm font-medium" data-filter="interieur">Intérieur</button>
+          <button class="filter-btn px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--muted)] text-sm font-medium" data-filter="exterieur">Extérieur</button>
+          <button class="filter-btn px-4 py-2 rounded-lg border border-[var(--border)] text-[var(--muted)] text-sm font-medium" data-filter="deco">Décoration</button>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4" id="gallery">
+        <!-- Gallery items will be rendered by JS -->
+      </div>
+    </div>
+  </section>
+  
+  <!-- About Section -->
+  <section id="about" class="py-24 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[var(--terracotta)] to-[var(--ochre)] opacity-5"></div>
+    
+    <div class="max-w-7xl mx-auto relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <span class="text-[var(--accent)] text-sm tracking-widest uppercase reveal">Notre histoire</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold mt-4 reveal reveal-delay-1">
+            Une passion familiale depuis 3 générations
+          </h2>
+          <p class="text-[var(--muted)] mt-6 leading-relaxed reveal reveal-delay-2">
+            Fondée par la famille Parisi, notre entreprise perpétue un savoir-faire artisanal transmis de génération en génération. Implantés au coeur de la Provence, nous mettons notre expertise au service de votre patrimoine.
+          </p>
+          <p class="text-[var(--muted)] mt-4 leading-relaxed reveal reveal-delay-3">
+            Notre philosophie : allier techniques traditionnelles et innovations pour des réalisations durables et esthétiques. Chaque projet est unique, chaque finition est soignée.
+          </p>
+          
+          <div class="grid grid-cols-2 gap-6 mt-10">
+            <div class="reveal reveal-delay-3">
+              <div class="text-3xl font-display font-bold text-[var(--accent)]">RGE</div>
+              <div class="text-sm text-[var(--muted)] mt-1">Certifié Reconnu Garant de l'Environnement</div>
+            </div>
+            <div class="reveal reveal-delay-4">
+              <div class="text-3xl font-display font-bold text-[var(--accent)]">10 ans</div>
+              <div class="text-sm text-[var(--muted)] mt-1">Garantie décennale sur tous nos travaux</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="relative reveal">
+          <div class="aspect-[4/5] rounded-2xl overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=750&fit=crop" alt="Artisan peintre au travail" class="w-full h-full object-cover">
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-[var(--bg)] p-6 rounded-xl border border-[var(--border)]">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[var(--terracotta)] to-[var(--ochre)] flex items-center justify-center text-2xl font-display font-bold">
+                M
+              </div>
+              <div>
+                <div class="font-display font-semibold">Marco Parisi</div>
+                <div class="text-sm text-[var(--muted)]">Fondateur & Artisan</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Testimonials -->
+  <section class="py-24 px-6 border-y border-[var(--border)]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-[var(--accent)] text-sm tracking-widest uppercase reveal">Témoignages</span>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mt-4 reveal reveal-delay-1">Ce que disent nos clients</h2>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 reveal reveal-delay-1">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-[var(--muted)] leading-relaxed">
+            "Travail impeccable pour le ravalement de notre façade. L'équipe est professionnelle, ponctuelle et le résultat dépasse nos attentes. Je recommande vivement !"
+          </p>
+          <div class="flex items-center gap-3 mt-6 pt-6 border-t border-[var(--border)]">
+            <div class="w-10 h-10 rounded-full bg-[var(--accent)] flex items-center justify-center font-semibold">SD</div>
+            <div>
+              <div class="font-medium">Sophie Durand</div>
+              <div class="text-sm text-[var(--muted)]">Aix-en-Provence</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 reveal reveal-delay-2">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-[var(--muted)] leading-relaxed">
+            "Les conseils pour le choix des couleurs étaient parfaits. Notre intérieur a complètement changé de style. Un vrai savoir-faire artisanal, merci à toute l'équipe !"
+          </p>
+          <div class="flex items-center gap-3 mt-6 pt-6 border-t border-[var(--border)]">
+            <div class="w-10 h-10 rounded-full bg-[var(--sage)] flex items-center justify-center font-semibold">PM</div>
+            <div>
+              <div class="font-medium">Pierre Martin</div>
+              <div class="text-sm text-[var(--muted)]">Marseille</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 reveal reveal-delay-3">
+          <div class="flex gap-1 mb-4">
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-5 h-5 text-[var(--ochre)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <p class="text-[var(--muted)] leading-relaxed">
+            "Intervention rapide et soignée pour la peinture de nos bureaux. L'équipe s'est adaptée à nos horaires pour ne pas perturber notre activité. Très professionnel."
+          </p>
+          <div class="flex items-center gap-3 mt-6 pt-6 border-t border-[var(--border)]">
+            <div class="w-10 h-10 rounded-full bg-[var(--ochre)] flex items-center justify-center font-semibold">CL</div>
+            <div>
+              <div class="font-medium">Claire Lambert</div>
+              <div class="text-sm text-[var(--muted)]">Avignon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contact Section -->
+  <section id="contact" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+        <div>
+          <span class="text-[var(--accent)] text-sm tracking-widest uppercase reveal">Contact</span>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold mt-4 reveal reveal-delay-1">
+            Parlons de votre projet
+          </h2>
+          <p class="text-[var(--muted)] mt-6 leading-relaxed reveal reveal-delay-2">
+            Devis gratuit sous 48h. Intervention sur toute la Provence : Bouches-du-Rhône, Vaucluse, Var, Alpes-de-Haute-Provence.
+          </p>
+          
+          <div class="space-y-6 mt-10">
+            <div class="flex items-center gap-4 reveal reveal-delay-2">
+              <div class="w-12 h-12 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[var(--accent)]">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-sm text-[var(--muted)]">Téléphone</div>
+                <a href="tel:+33600000000" class="font-display text-lg hover:text-[var(--accent)] transition-colors">06 00 00 00 00</a>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-4 reveal reveal-delay-3">
+              <div class="w-12 h-12 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[var(--accent)]">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-sm text-[var(--muted)]">Email</div>
+                <a href="mailto:contact@ppp-peinture.fr" class="font-display text-lg hover:text-[var(--accent)] transition-colors">contact@ppp-peinture.fr</a>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-4 reveal reveal-delay-4">
+              <div class="w-12 h-12 rounded-xl bg-[var(--card)] border border-[var(--border)] flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[var(--accent)]">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-sm text-[var(--muted)]">Zone d'intervention</div>
+                <span class="font-display text-lg">Provence & environs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 reveal">
+          <form id="contactForm" class="space-y-5">
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-sm font-medium mb-2">Nom</label>
+                <input type="text" name="nom" required class="form-input w-full px-4 py-3 rounded-xl text-[var(--fg)]" placeholder="Votre nom">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">Prénom</label>
+                <input type="text" name="prenom" required class="form-input w-full px-4 py-3 rounded-xl text-[var(--fg)]" placeholder="Votre prénom">
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium mb-2">Email</label>
+              <input type="email" name="email" required class="form-input w-full px-4 py-3 rounded-xl text-[var(--fg)]" placeholder="votre@email.com">
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium mb-2">Téléphone</label>
+              <input type="tel" name="telephone" class="form-input w-full px-4 py-3 rounded-xl text-[var(--fg)]" placeholder="06 00 00 00 00">
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium mb-2">Type de projet</label>
+              <select name="projet" class="form-input w-full px-4 py-3 rounded-xl text-[var(--fg)]">
+                <option value="">Sélectionnez un type</option>
+                <option value="interieur">Peinture intérieure</option>
+                <option value="exterieur">Peinture extérieure</option>
+                <option value="ravalement">Ravalement façade</option>
+                <option value="decoration">Décoration</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            
+            <div>
+              <label class="block text-sm font-medium mb-2">Message</label>
+              <textarea name="message" rows="4" required class="form-input w-full px-4 py-3 rounded-xl text-[var(--fg)] resize-none" placeholder="Décrivez votre projet..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary w-full py-4 rounded-xl font-semibold text-lg">
+              <span>Envoyer ma demande</span>
+            </button>
+          </form>
+          
+          <div id="formSuccess" class="hidden text-center py-8">
+            <div class="w-16 h-16 rounded-full bg-[var(--sage)] mx-auto flex items-center justify-center mb-4">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <h3 class="font-display text-2xl font-semibold">Message envoyé</h3>
+            <p class="text-[var(--muted)] mt-2">Nous vous répondrons sous 48h.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="border-t border-[var(--border)] py-12 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-10">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[var(--terracotta)] to-[var(--ochre)] flex items-center justify-center">
+              <span class="font-display font-bold text-white">PPP</span>
+            </div>
+            <span class="font-display text-lg font-semibold">Parisi Provence Peinture</span>
+          </div>
+          <p class="text-[var(--muted)] text-sm max-w-sm">
+            Artisans peintres passionnés, nous mettons notre savoir-faire au service de vos projets depuis 3 générations.
+          </p>
+          <div class="flex gap-4 mt-6">
+            <a href="#" class="w-10 h-10 rounded-lg bg-[var(--card)] border border-[var(--border)] flex items-center justify-center hover:border-[var(--accent)] transition-colors" aria-label="Facebook">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-lg bg-[var(--card)] border border-[var(--border)] flex items-center justify-center hover:border-[var(--accent)] transition-colors" aria-label="Instagram">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="font-display font-semibold mb-4">Services</h4>
+          <ul class="space-y-2 text-sm text-[var(--muted)]">
+            <li><a href="#services" class="hover:text-[var(--accent)] transition-colors">Peinture intérieure</a></li>
+            <li><a href="#services" class="hover:text-[var(--accent)] transition-colors">Peinture extérieure</a></li>
+            <li><a href="#services" class="hover:text-[var(--accent)] transition-colors">Ravalement façade</a></li>
+            <li><a href="#services" class="hover:text-[var(--accent)] transition-colors">Décoration</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-display font-semibold mb-4">Informations</h4>
+          <ul class="space-y-2 text-sm text-[var(--muted)]">
+            <li><a href="#about" class="hover:text-[var(--accent)] transition-colors">A propos</a></li>
+            <li><a href="#realisations" class="hover:text-[var(--accent)] transition-colors">Réalisations</a></li>
+            <li><a href="#contact" class="hover:text-[var(--accent)] transition-colors">Contact</a></li>
+            <li><a href="#" class="hover:text-[var(--accent)] transition-colors">Mentions légales</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-[var(--border)] mt-10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-[var(--muted)]">
+        <p>2024 PPP - Parisi Provence Peinture. Tous droits réservés.</p>
+        <p>SIRET: 000 000 000 00000 | RGE certifié</p>
+      </div>
+    </div>
+  </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true
+  <script>
+    // Gallery data
+    const galleryData = [
+      { id: 1, category: 'interieur', title: 'Salon provençal', location: 'Aix-en-Provence', image: 'https://images.unsplash.com/photo-1562663474-6cbb3eaa4d14?w=600&h=400&fit=crop' },
+      { id: 2, category: 'exterieur', title: 'Façade mas provençal', location: 'Gordes', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop' },
+      { id: 3, category: 'deco', title: 'Enduit à la chaux', location: 'Marseille', image: 'https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&h=400&fit=crop' },
+      { id: 4, category: 'interieur', title: 'Chambre provençale', location: 'Avignon', image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop' },
+      { id: 5, category: 'exterieur', title: 'Ravalement villa', location: 'Cassis', image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=400&fit=crop' },
+      { id: 6, category: 'deco', title: 'Patine décorative', location: 'Arles', image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&h=400&fit=crop' },
+    ];
+
+    // Initialize elements
+    const gallery = document.getElementById('gallery');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const navbar = document.getElementById('navbar');
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const contactForm = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+    
+    // Render gallery
+    function renderGallery(filter = 'all') {
+      const filtered = filter === 'all' ? galleryData : galleryData.filter(item => item.category === filter);
+      
+      gallery.innerHTML = filtered.map((item, index) => `
+        <div class="gallery-item rounded-xl overflow-hidden aspect-[4/3] reveal reveal-delay-${(index % 4) + 1}" data-category="${item.category}">
+          <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+          <div class="gallery-overlay">
+            <div>
+              <h3 class="font-display text-lg font-semibold">${item.title}</h3>
+              <p class="text-sm text-[var(--muted)]">${item.location}</p>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      
+      // Re-observe new elements
+      observeElements();
+    }
+    
+    // Filter buttons
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('border-[var(--accent)]', 'text-[var(--accent)]');
+          b.classList.add('border-[var(--border)]', 'text-[var(--muted)]');
         });
-    </script>
+        btn.classList.remove('border-[var(--border)]', 'text-[var(--muted)]');
+        btn.classList.add('border-[var(--accent)]', 'text-[var(--accent)]');
+        renderGallery(btn.dataset.filter);
+      });
+    });
+    
+    // Intersection Observer for reveal animations
+    function observeElements() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      
+      document.querySelectorAll('.reveal, .brush-reveal').forEach(el => {
+        observer.observe(el);
+      });
+    }
+    
+    // Counter animation
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.dataset.target);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            const updateCounter = () => {
+              current += step;
+              if (current < target) {
+                counter.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+              } else {
+                counter.textContent = target;
+              }
+            };
+            
+            updateCounter();
+            observer.unobserve(counter);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      counters.forEach(counter => observer.observe(counter));
+    }
+    
+    // Navbar scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        navbar.style.background = 'rgba(26, 23, 20, 0.95)';
+        navbar.style.backdropFilter = 'blur(10px)';
+      } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+      }
+      
+      lastScroll = currentScroll;
+    });
+    
+    // Mobile menu
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Form submission
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Simulate form submission
+      const btn = contactForm.querySelector('button[type="submit"]');
+      btn.innerHTML = '<span>Envoi en cours...</span>';
+      btn.disabled = true;
+      
+      setTimeout(() => {
+        contactForm.classList.add('hidden');
+        formSuccess.classList.remove('hidden');
+      }, 1500);
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderGallery();
+      observeElements();
+      animateCounters();
+    });
+  </script>
 </body>
 </html>
-
-
